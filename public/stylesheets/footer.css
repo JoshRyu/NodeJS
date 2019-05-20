@@ -1,0 +1,12 @@
+.footer {
+    position: relative;
+    left: 0;
+    bottom: 0;
+    height: 0;
+    width: 100%;
+    background-color: powderblue;
+    color: black;
+    text-align: center;
+    min-height: 5%;
+
+}

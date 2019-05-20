@@ -1,0 +1,73 @@
+
+body {
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    background-color: white;
+    position: relative;
+
+}
+
+
+tr {
+    line-height: 10px;
+    min-height: 10px;
+    height: 20px;
+    width: 50%;
+}
+
+
+.active-cyan-4 input[type=text]:focus:not([readonly]) {
+    border: 1px solid #4dd0e1;
+    text-align: center;
+}
+
+
+.nav-item-active {
+    -webkit-box-shadow: 0px 20px 21px -4px rgba(209,209,209,0.5);
+    -moz-box-shadow: 0px 20px 21px -4px rgba(209,209,209,0.5);
+    box-shadow: 0px 20px 21px -4px rgba(209,209,209,0.5);
+    color: black;
+}
+
+.navbar-wrapper {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100% !important;
+    left: 0;
+    z-index: 20;
+    background-color: white;
+    color: black;
+
+}
+
+.text-right {
+    margin-right: 10px;
+    margin-top: 10px;
+}
+
+#largecontainer {
+    border-style: solid;
+    border-width: 1.5px;
+    border-color: black;
+    border-radius: 2% / 15%;
+}
+
+#smallcontainer {
+    border-style: solid;
+    margin: 15px;
+    border-width: 1px;
+    border-radius: 2% / 25%;
+}
+
+#submissionTable {
+    border-style: solid;
+    margin: 15px;
+    border-width: 0.5px;
+}
+
+.submitform {
+    margin: auto;
+    width: 50%;
+    border: 3px solid green;
+    padding: 10px;
+}

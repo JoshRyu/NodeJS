@@ -1,0 +1,111 @@
+<!--Page accessible from search page to display further information about job listing-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Job Listing</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+<!--Nav bar-->
+<nav class="navbar navbar-expand-lg navbar-light nav-tabs">
+    <a class="navbar-brand" href="/"><img src="/images/HireMeLogo.png" alt="Logo" style="width:82px; height:35px;"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar2" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+<div class="collapse navbar-collapse" id="navbar2">
+    <div class="navbar-nav">
+        <a class="nav-item nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-item nav-link " href="/search">Search</a>
+        <a class="nav-item nav-link" href="/submit">Submit a Job</a>
+        <a class="nav-item nav-link" href="/jobrequest">Submit a Job Request</a>
+        <a class="nav-item nav-link" href="/requestlist">Search Job Requests</a>
+        <a class="nav-item nav-link" href="/company">Companies</a>
+    </div>
+</div>
+</nav>
+<!--Breadcrumb bar-->
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item"><a href="/search">Search</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Job Page</li>
+    </ol>
+</nav>
+<!--Professional looking information pertaining to job listing with a submit application button-->
+<main role="main" class="container">
+    <div class="jumbotron">
+        <h1 class="display-4"><%= data.job_title %></h1>
+        <h2><%= data.company_name %></h2>
+        <hr class="my-4">
+        <p class="card-title">Company Rating: <%= data.job_rating %></p>
+        <button type="button" class="btn btn-primary btn-large" data-toggle="modal" data-target="#exampleModal" data-whatever="<%= data.job_title %>">Apply</button>
+    </div>
+</main>
+<!--Pop up for job application submission-->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Apply</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Email</label>
+                        <input type="email" class="form-control" id="recipient-name" placeholder="Enter email">
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="col-form-label">Cover letter</label>
+                        <textarea class="form-control" id="message-text"></textarea>
+                        <hr class="my-4">
+                        <button type="submit" class="btn btn-outline-info btn-large">Upload your CV</button>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Apply now!</button>
+            </div>
+        </div>
+    </div>
+    <tbody>
+    <% for(var i=0; i<data.length; i++) {%>
+        <tr>
+            <td scope="row"><a href="<%= "/joblist/"  + data[i].id %>"><%= data[i].job_title %></a></td>
+            <td><%= data[i].company_name %></td>
+            <td><%= data[i].job_location %></td>
+            <td>£<%= data[i].job_salary %></td>
+            <% if (data[i].job_rating != null) { %>
+                <td><%= data[i].job_rating%>/10</td>
+            <% } %>
+            <% if (data[i].job_rating == null) { %>
+                <td>Nil</td>
+            <% }%>
+            <td>SELECTION</td>
+        </tr>
+    <% } %>
+    </tbody>
+</div>
+
+<!--Footer-->
+<div class="footer">
+    <p class="text-right" style="margin-right: 10px; margin-top: 10px">FindYourFuture©</p>
+</div>
+<script>
+    $('#exampleModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        var recipient = button.data('whatever') // Extract info from data-* attributes
+        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+        var modal = $(this)
+        modal.find('.modal-title').text('Apply for ' + recipient)
+    })
+</script>
+</body>
+</html>

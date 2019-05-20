@@ -1,0 +1,92 @@
+<!--This is the search results page, can be navigated to or sent there via index-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Job Search</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="/javascripts/search.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</head>
+<!--On load run searches in job & location from index-->
+<body onload=searchJob();searchLocation();>
+<!--Nav bar-->
+<nav class="navbar navbar-expand-lg navbar-light nav-tabs">
+    <a class="navbar-brand" href="/"><img src="/images/HireMeLogo.png" alt="Logo" style="width:82px; height:35px;"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+            <a class="nav-item nav-link" href="/">Home</a>
+            <a class="nav-item nav-link active" href="/search">Search <span class="sr-only">(current)</span></a>
+            <a class="nav-item nav-link" href="/submit">Submit a Job</a>
+            <a class="nav-item nav-link" href="/jobrequest">Submit a Job Request</a>
+            <a class="nav-item nav-link" href="/requestlist">Search Job Requests</a>
+            <a class="nav-item nav-link" href="/company">Companies</a>
+        </div>
+    </div>
+</nav>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Search</li>
+    </ol>
+</nav>
+<div class="container" style="padding: 2%">
+    <div class="row">
+        <div class="col-sm">
+            <h1 class="display-20">Job Title</h1>
+        </div>
+        <div class="col-sm">
+            <h1 class="display-20">Location</h1>
+        </div>
+    </div>
+        <div class="row" >
+            <div class="col-sm">
+                <input class="form-control mr-sm-2" type="search"  <%=job%> id="name" onkeyup="searchJob()" aria-label="Search">
+            </div>
+            <div class="col-sm">
+                <input class="form-control mr-sm-2" type="search"  <%=location%> id="location" onkeyup="searchLocation()" aria-label="Search">
+            </div>
+        </div>
+<hr class="my-4">
+    <table class="table table-striped table-hover" id="jobTable">
+        <caption>List of search results</caption>
+        <thead class="thead-light">
+        <tr>
+            <th scope="col">Job Name</th>
+            <th scope="col">Company</th>
+            <th scope="col">Location</th>
+            <th scope="col">Salary</th>
+            <th scope="col">Rating</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% for(var i=0; i<data.length; i++) {%>
+            <tr>
+                <td scope="row"><a href="<%= "/joblist/"  + data[i].id %>"><%= data[i].job_title %></a></td>
+                <td><%= data[i].company_name %></td>
+                <td><%= data[i].job_location %></td>
+                <td>£<%= data[i].job_salary %></td>
+                <% if (data[i].job_rating != null) { %>
+                    <td><%= data[i].job_rating%>/10</td>
+                <% } %>
+                <% if (data[i].job_rating == null) { %>
+                    <td>Nil</td>
+                <% }%>
+
+            </tr>
+        <% } %>
+        </tbody>
+    </table>
+</div>
+<!--Footer-->
+<div class="footer">
+    <p class="text-right" style="margin-right: 10px; margin-top: 10px">FindYourFuture©</p>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+</body>
+</html>

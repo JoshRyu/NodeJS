@@ -1,0 +1,80 @@
+<!--Companies with job listings page-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+<!--Nav bar-->
+<nav class="navbar navbar-expand-lg navbar-light nav-tabs">
+    <a class="navbar-brand" href="/"><img src="/images/HireMeLogo.png" alt="Logo" style="width:82px; height:35px;"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+            <a class="nav-item nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+            <a class="nav-item nav-link " href="/search">Search</a>
+            <a class="nav-item nav-link" href="/submit">Submit a Job</a>
+            <a class="nav-item nav-link" href="/jobrequest">Submit a Job Request</a>
+            <a class="nav-item nav-link" href="/requestlist">Search Job Requests</a>
+            <a class="nav-item nav-link active" href="/company">Companies</a>
+        </div>
+    </div>
+</nav>
+<!--Breadcrumb bar-->
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Company List</li>
+    </ol>
+</nav>
+<!--Companies list in card format-->
+<div class="container">
+    <div class="row">
+        <div class="row">
+            <% for(var i=0; i<data.length; i++) {%>
+            <% if (data[i].company_name != null) { %>
+                    <div class="card" style="width: 24rem; padding: 5px;">
+                        <% if (data[i].job_image != null) { %>
+                        <img class="card-img-top rounded " src="uploads/<%=data[i].job_image%>" aria-label="Company image placeholder">
+                        <% }%>
+                        <% if (data[i].job_image == null) { %>
+                        <img class="card-img-top rounded " src="images/placeholder-company.png" aria-label="Company image placeholder">
+                        <% }%>
+                        <div class="card-body">
+                            <h5 class="card-title"><%= data[i].company_name%></h5>
+                            <hr class="my-4">
+                            <h6 class="card-subtitle mb-2 text-muted">Company Rating: <%= data[i].job_rating %>/10</h6>
+                            <p class="card-text"><%= data[i].job_description %></p>
+                            <hr class="my-4">
+                            <h6 class="card-subtitle mb-2 text-muted">Update the Company Photo:</h6>
+                            <form action="/company/<%= data[i].company_name %>" method="post" enctype="multipart/form-data">
+                                <input type="file" name="image">
+                                <input  type="submit" value="Upload" id=<%= data[i].company_name %> style="margin-bottom:10px;">
+                            </form>
+                            <hr class="my-4">
+                            <h6 class="card-subtitle mb-2 text-muted">Update the Company's Rating:</h6>
+                            <form action="/company/rating/<%= data[i].job_rating %>" method="post">
+                                <input type="number" name="jobrating" id="jobrating" min="1" max="10">
+                                <input type="submit" value="Update" id=<%= data[i].job_rating %> style="margin-bottom:10px;">
+                            </form>
+                        </div>
+                    </div>
+                <% } %>
+            <% } %>
+        </div>
+    </div>
+</div>
+
+
+<!--Footer-->
+<div class="footer">
+    <p class="text-right" style="margin-right: 10px; margin-top: 10px">FindYourFuture©</p>
+</div>
+</body>
+</html>

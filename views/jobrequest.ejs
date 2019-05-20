@@ -1,0 +1,78 @@
+<!--Job request submission page-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="/javascripts/jobrequest.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+<!--Nav bar-->
+<nav class="navbar navbar-expand-lg navbar-light nav-tabs">
+    <a class="navbar-brand" href="/"><img src="/images/HireMeLogo.png" alt="Logo" style="width:82px; height:35px;"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+            <a class="nav-item nav-link" href="/">Home </a>
+            <a class="nav-item nav-link" href="/search">Search</a>
+            <a class="nav-item nav-link" href="/submit">Submit a Job</a>
+            <a class="nav-item nav-link active" href="/jobrequest">Submit a Job Request<span class="sr-only">(current)</span></a>
+            <a class="nav-item nav-link" href="/requestlist">Search Job Requests</a>
+            <a class="nav-item nav-link" href="/company">Companies</a>
+        </div>
+    </div>
+</nav>
+<!--Breadcrumb bar-->
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Request a Job</li>
+    </ol>
+</nav>
+<!--Job request information form-->
+<div class="container" style="padding: 2%">
+    <div class="row">
+        <div class="col-sm">
+            <h1 class="display-20">Submit a Job Request</h1>
+            <hr class="my-4">
+                <form id=“xForm" onsubmit="onSubmit()">
+                    <p><label class="col-md-2 control-label" for='firstname'>First Name:</label>
+                        <input type="text" name="firstname" id="firstname" required>
+                    </p>
+                    <p><label class="col-md-2 control-label" for='lastname'>Surname:</label>
+                        <input type="text" name="lastname" id="lastname" required>
+                    </p>
+                    <p><label class="col-md-2 control-label" for='jobtitle'>Job Title:</label>
+                        <input type="text" name="jobtitle" id="jobtitle" required>
+                    </p>
+                    <p><label class="col-md-2 control-label" for='joblocation'>Job Location:</label>
+                        <input type="text" name="joblocation" id="joblocation" required>
+                    </p>
+                    <p><label class="col-md-2 control-label" for='jobsalary'>Expecting Salary:</label>
+                        <input type="number" name="jobsalary" id="jobsalary" min="1">
+                    </p>
+                    <p><label class="col-md-2 control-label" for='individualdescription'>Who you are: </label>
+                        <textarea name="individualdescription" id="individualdescription" content="" rows="4" cols="50" max="200">
+                            </textarea>
+                    </p>
+                    <p><label class="col-md-2 control-label"></label>
+                        <input class="col-md-2 control-label btn btn-info" type="submit" name="g" value="Submit" id="g" >
+                    </p>
+                </form>
+    <div id="results" style="margin-top:30px"></div>
+        </div>
+    </div>
+</div>
+
+<!--Footer-->
+<div class="footer">
+    <p class="text-right" style="margin-right: 10px; margin-top: 10px">FindYourFuture©</p>
+</div>
+
+</body>
+</html>
